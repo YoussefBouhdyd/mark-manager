@@ -1,0 +1,233 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: monospace;
+}
+
+/* Start General & Variables  */
+:root {
+    --main-transition : .3s;
+    --text-color: #777;
+    --blue-color: #0075FF;
+    --orange-color: #F59E0B;
+    --green-color: #22C55E;
+    --red-color: #F44336;
+    --black-color: #333;
+    --main-bg-color: #F1F5F9;
+
+}
+/* Input Field  */
+.input-field {
+    position: relative;
+    margin-bottom: 20px;}
+.input-field > input {
+    border: 1px solid #ccc;
+    background: transparent;
+    padding: 10px 10px 10px 30px;
+    width: 100%;
+    border-radius: 5px;
+    outline: none;
+}
+.input-field > i {
+    position: absolute;
+    top: 50%;transform: translateY(-50%);
+    margin-left: 10px;
+    transition: var(--main-transition);
+    opacity: .5;
+}
+.input-field:focus-within > i {
+    opacity: 1;
+}
+::placeholder {
+    transition: var(--main-transition);
+}
+input:focus::placeholder {
+    opacity: 0;
+}
+/* End Input Field  */
+
+/* Start Title  */
+
+.title {margin: 10px 0 20px;}
+
+
+/* End Title  */
+
+/* Start Submit button  */
+
+.submit {
+    display: block;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+    text-decoration: none;
+    color: white;
+    background: #278cff;
+    padding: 10px 20px;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: var(--main-transition);}
+.submit:hover {
+    background-color: var(--blue-color);
+}
+.submit > i {
+    font-size: 15px;
+}
+
+/*  End Submit button  */
+
+
+
+/* End General & Variables  */
+
+/* Start Container  */
+.container {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+/* Small Screen  */
+@media (min-width:768px) {
+    .container {
+        width: 750px;
+    }
+}
+/* Medium Screen  */
+@media (min-width:992px) {
+    .container {
+        width: 970px;
+    }
+}
+@media (min-width:1200px) {
+    .container {
+        width: 1170px;
+    }
+}
+/* End Container  */
+
+/* Start Header Styling  */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 10px;
+    height: 100px;
+    box-shadow: 0 0 10px 0 #ccc;
+    position: relative;
+    z-index: 1;
+}
+header .logo {
+    font-size: 30px;
+}
+header .links {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 15px;
+}
+header .links .link a{
+    text-decoration: none;
+    color: var(--black-color);
+    transition: var(--main-transition);
+}
+header .links .link a:hover {
+    color: var(--red-color);
+}
+/* End Header Styling  */
+
+/* Start Sign Section  */
+.sign {
+    height: calc(100vh - 100px);
+    background: var(--main-bg-color);
+    position: relative;
+}
+.sign .sign-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    padding: 30px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    z-index: 2;
+}
+/* End Sign Section  */
+
+.result {
+    height: calc(100vh - 100px);
+    position: relative;
+    background: var(--main-bg-color);
+}
+
+.result .result-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    padding: 30px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px #ccc;
+}
+.result .result-box .student-info{
+    display: flex;
+    align-items: center;
+    gap: 5px;}
+.result .result-box .student-info .avatar img{
+    max-width: 100%;
+    width: 100px;
+}
+.result .result-box .student-info .level{
+    color: var(--text-color);
+}
+
+.result .result-box .student-result {
+    display: flex;
+}
+.result .result-box .student-result .result-details{
+    padding: 0 10px 0 0;
+}
+.result .result-box > h2{
+    font-size: 16px;
+    color: var(--red-color);
+    margin-top: 10px;
+}
+.result .result-box .student-result .result-details .subjects{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0 0;
+}
+.result .result-box .student-result .result-details .subjects .side .subject{
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+.result .result-box .student-result .result-details .subjects .side .subject span:last-child{
+    background: #ddd;
+    padding: 5px;
+    border-radius: 5px;
+}
+.result .result-box .student-result .moyen {
+    position: relative;
+    font-size: 35px;
+    display: flex;
+    align-items: center;
+    border-left: 1px solid #ccc;
+    padding: 0 15px;
+}
+.result .result-box .student-result .moyen > span{
+    position: absolute;
+    font-size: 12px;
+    top: 50%;
+    right: -10px;
+}
