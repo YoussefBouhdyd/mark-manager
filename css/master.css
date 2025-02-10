@@ -122,9 +122,7 @@ header {
     position: relative;
     z-index: 1;
 }
-header .logo {
-    font-size: 30px;
-}
+header .logo img {width: 200px;}
 header .links {
     list-style: none;
     display: flex;
@@ -231,3 +229,41 @@ header .links .link a:hover {
     top: 50%;
     right: -10px;
 }
+
+
+/* Calcule Section  */
+
+.sign.mark form .marks {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.sign.mark form .marks .side .mark-input {
+    margin-bottom: 10px;
+}
+
+.sign.mark form .marks .side .mark-input > label{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sign.mark form .marks .side .mark-input > label input{
+    width: 90px;
+    margin-left: 10px;
+    background: var(--main-bg-color);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    padding: 5px 10px;
+}
+
+.sign.mark form .submit.mark {
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+
+
+/* End Calcule Section  */
