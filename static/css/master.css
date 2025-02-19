@@ -71,7 +71,10 @@ input:focus::placeholder {
     padding: 10px 20px;
     font-weight: bold;
     border-radius: 5px;
-    transition: var(--main-transition);}
+    transition: var(--main-transition);
+    border: none;
+    cursor: pointer;
+}
 .submit:hover {
     background-color: var(--blue-color);
 }
@@ -155,6 +158,11 @@ header .links .link a:hover {
     border: 1px solid #ccc;
     border-radius: 8px;
     z-index: 2;
+}
+.sign .sign-box .login-alert {
+    margin: -10px 0 5px;
+    color: var(--red-color);
+    font-weight: bold;
 }
 /* End Sign Section  */
 

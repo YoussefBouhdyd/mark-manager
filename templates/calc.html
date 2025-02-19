@@ -1,0 +1,59 @@
+{% extends "index.html" %}
+{% block content %}
+<div class="sign mark">
+    <div class="container">
+        <div class="sign-box mark">
+            <h2 class="title">Enter Notes Of Student</h2>
+            <form action="/calc" method="post">
+                <div class="input-field student-name">
+                    <i class="fa fa-user"></i>
+                    <input type="text" placeholder="student name" name="student-name" required>
+                </div>
+                <div class="marks">
+                    <div class="side">
+                        <div class="mark-input">
+                            <label>
+                                SI
+                                <input  type="number" name="si" min="0" max="20" step=".25" required>
+                            </label>
+                        </div>
+                        <div class="mark-input">
+                            <label>
+                                RO
+                                <input type="number" name="ro" min="0" max="20" step=".25" required>
+                            </label>
+                        </div>
+                        <div class="mark-input">
+                            <label>
+                                Compilation
+                                <input type="number" name="compilation" min="0" max="20" step=".25" required>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="side">
+                        <div class="mark-input">
+                            <label>
+                                OOP
+                                <input type="number" name="oop" min="0" max="20" step=".25" required>
+                            </label>
+                        </div>
+                        <div class="mark-input">
+                            <label>
+                                Networking
+                                <input type="number" name="networking" min="0" max="20" step=".25" required>
+                            </label>
+                        </div>
+                        <div class="mark-input">
+                            <label>
+                                Data Base
+                                <input type="number" name="data-base" min="0" max="20" step=".25" required>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <input type="submit" class="submit mark" value="Send Data" >
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

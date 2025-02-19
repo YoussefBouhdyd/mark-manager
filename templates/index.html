@@ -13,33 +13,40 @@
     <header>
         <div class="logo"><img src="./images/logoFssm.png" alt="logo"></div>
         <ul class="links">
-            <li class="link"><a href="index.html">Home</a></li>
+            <li class="link"><a href="{{ url_for('index') }}">Home</a></li>
             <li class="link"><a href="#">About Us</a></li>
             <li class="link"><a href="#">Testimonials</a></li>
             <li class="link"><a href="#">Contact Us</a></li>
         </ul>
     </header>
     <!-- End Header  -->
+    {% block content %}
     <!-- Start Sign  -->
     <div class="sign">
         <div class="container">
             <div class="sign-box">
                 <h2 class="title">Welcome to the Results Platform</h2>
-                <form>
+                {% with message = get_flashed_messages(with_categories = True) %}
+                    {% if message %}
+                        <p class="{{message[0][0]}}"> {{message[0][1]}} </p>
+                    {% endif %}
+                {% endwith %}
+                <form action="/" method="post" >
                     <div class="input-field">
                         <i class="fa fa-user"></i>
-                        <input type="text" placeholder="username" required>
+                        <input type="text" placeholder="username" name="user-name" required>
                     </div>
                     <div class="input-field">
                         <i class="fa fa-lock"></i>
-                        <input type="password" placeholder="password" required>
+                        <input type="password" placeholder="password" name="password" required>
                     </div>
-                    <a href="claclul.html" class="submit">Sign In</a>
+                    <input type="submit" class="submit">
                 </form>
                 <a href="#" class="forget">You forget your password ?</a>
             </div>
         </div>
     </div>
     <!-- End Sign  -->
+    {% endblock %}
 </body>
 </html>
