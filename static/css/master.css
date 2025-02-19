@@ -275,3 +275,52 @@ header .links .link a:hover {
 
 
 /* End Calcule Section  */
+
+
+/* Start Components  */
+.primary-checkbox {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    align-items: center;
+    user-select: none;
+}
+.primary-checkbox > input {
+    visibility: hidden;
+}
+.primary-checkbox > div {
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    border: 1px solid #aaa;
+    margin-right: 10px;
+    position: relative;
+    transition: .3s;
+}
+.primary-checkbox > div::before {
+    content: "\f00c";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(230deg) scale(0);
+    font-size: 11px;
+    width: 0%;
+    height: 0%;
+    border-radius: 3px;
+    color: #fff;
+    background-color: var(--blue-color);
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .3s;
+}
+.primary-checkbox > input:checked + div::before {
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%) rotate(0deg) scale(1);
+    border: 1px solid var(--blue-color);
+}
+/* End Components  */
