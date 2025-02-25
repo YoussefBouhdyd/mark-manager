@@ -238,6 +238,28 @@ header .links .link a:hover {
     right: -10px;
 }
 
+button.log-out {
+    position: absolute;
+    padding: 10px;
+    right: 10px;
+    bottom: 10px;
+    border: none;
+    background: #f4433675;
+    color: white;
+    font-weight: bold;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-direction: column-reverse;
+    cursor: pointer;
+    transition: var(--main-transition);
+}
+
+button.log-out:hover {
+    background-color: var(--red-color);
+    box-shadow: 3px 3px #ccc;
+}
 
 /* Calcule Section  */
 

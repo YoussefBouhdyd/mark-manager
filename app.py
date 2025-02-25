@@ -25,17 +25,26 @@ def index():
 
 @app.route("/calc",methods=["POST","GET"])
 def calc():
-    if request.method == "GET":
+    if request.method == "GET" and request.cookies.get("login"):
         return render_template("calc.html")
-    student_name = request.form.get("student-name")
-    si = request.form.get("si")
-    ro = request.form.get("ro")
-    compilation = request.form.get("compilation")
-    oop = request.form.get("oop")
-    networking = request.form.get("networking")
-    data_base = request.form.get("data-base")
-    result = round((float(si) + float(ro) + float(compilation) + float(oop) + float(networking) + float(data_base)) / 8,2)
-    return render_template("result.html",student = student_name, si = si , ro = ro , compilation = compilation , oop = oop , networking = networking , data_base = data_base,result = result)
+    elif request.method == "POST":
+        student_name = request.form.get("student-name")
+        si = request.form.get("si")
+        ro = request.form.get("ro")
+        compilation = request.form.get("compilation")
+        oop = request.form.get("oop")
+        networking = request.form.get("networking")
+        data_base = request.form.get("data-base")
+        result = round((float(si) + float(ro) + float(compilation) + float(oop) + float(networking) + float(data_base)) / 8,2)
+        return render_template("result.html",student = student_name, si = si , ro = ro , compilation = compilation , oop = oop , networking = networking , data_base = data_base,result = result)
+    else:
+        return redirect("/")
+
+@app.route("/log-out",methods = ["GET"])
+def log_out():
+    response = make_response(redirect(url_for("index")))
+    response.delete_cookie("login");
+    return response
 
 
 if __name__ == "__main__":
