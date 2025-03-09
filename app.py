@@ -1,4 +1,10 @@
 from flask import Flask,render_template,request,make_response,flash,redirect,session,url_for
+import sqlite3
+
+
+with sqlite3.connect("./database/marks.db") as db:
+    cursor = db.cursor()
+    cursor.execute("CREATE TABLE IF NOT EXISTS marks(student_name TEXT,oop NUMERIC,net NUMERIC,db NUMERIC,comp NUMERIC,si NUMERIC,ro NUMERIC)")
 
 app = Flask(__name__,static_url_path="/")
 app.secret_key = "1234"
