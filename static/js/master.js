@@ -8,4 +8,3 @@ request.onreadystatechange = _ => {
     }
 }
 }
-
