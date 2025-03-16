@@ -37,6 +37,12 @@ Mark-Manger is a simple web application designed for students and teachers. Teac
    ```bash
    pip install -r requirements.txt
    ```
+5. Initialise the database
+   ```bash
+   flask db init
+   flask db migrate -m "Recreating migrations"
+   flask db upgrade
+   ```
 5. Run the application:
    ```bash
    python app.py
