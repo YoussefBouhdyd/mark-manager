@@ -21,15 +21,27 @@ Mark-Manger is a simple web application designed for students and teachers. Teac
    git clone https://github.com/yourusername/mark-mange.git
    cd mark-mange
    ```
-2. Install dependencies:
+2. Create and Activate Virtul Environment
+   
+   for `Mac` and `Linux` users
+   ```bash
+   python3 -m venv mark-ve
+   source mark-ve/bin/activate
+   ```
+   for `Windows` users
+   ```bash
+   python -m venv mark-ve
+   source mark-ve\Scripts\activate
+   ```
+4. Install dependencies:
    ```bash
    pip install -r requirements.txt
    ```
-3. Run the application:
+5. Run the application:
    ```bash
    python app.py
    ```
-4. Open your browser and visit:
+6. Open your browser and visit:
    ```
    http://127.0.0.1:5000
    ```
