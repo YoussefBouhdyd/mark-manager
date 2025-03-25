@@ -8,17 +8,34 @@ body {
     font-family: monospace;
 }
 
-/* Start General & Variables  */
+/*===================== Start General & Variables =====================*/
+
 :root {
     --main-transition: 0.3s;
     --text-color: #777;
-    --blue-color: #0075f0;
+    --blue-color: #0075ff;
     --orange-color: #f59e0b;
     --green-color: #22c55e;
     --red-color: #f44336;
     --black-color: #333;
     --main-bg-color: #f1f5f9;
 }
+
+::-webkit-scrollbar {
+    width: 5px;
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    background-color: #0077ff80;
+    transition: var(--main-transition);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--blue-color);
+}
+
 /* Input Field  */
 .input-field {
     position: relative;
@@ -27,10 +44,11 @@ body {
 .input-field > input {
     border: 1px solid #ccc;
     background: transparent;
-    padding: 10px 10px 10px 30px;
+    padding: 10px 10px 10px 35px;
     width: 100%;
     border-radius: 5px;
     outline: none;
+    display: block;
 }
 .input-field > i {
     position: absolute;
@@ -52,32 +70,76 @@ input:focus::placeholder {
 /* End Input Field  */
 
 /* Start Title  */
-
 .title {
     margin: 10px 0 20px;
-    width: 100%;
 }
-
-::-webkit-scrollbar {
-    width: 5px;
+.content-title {
+    position: relative;
+    text-transform: capitalize;
+    letter-spacing: -1px;
+    font-size: 25px;
+    padding: 20px;
+    margin: 0 0 10px 0;
 }
-
-::-webkit-scrollbar-track {
-    background-color: var(--main-bg-color);
+.content-title::after {
+    content: "";
+    position: absolute;
+    width: 150px;
+    height: 5px;
+    left: 20px;
+    bottom: 5px;
+    background-image: linear-gradient(90deg, black 40%, white 40%);
 }
-
-::-webkit-scrollbar-thumb {
-    background: #0075ff6e;
-    transition: var(--main-transition);
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background-color: var(--blue-color);
-}
-
 /* End Title  */
 
-/* End General & Variables  */
+/* Start Submit button  */
+.submit {
+    display: block;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+    text-decoration: none;
+    color: white;
+    background: #278cff;
+    padding: 10px 20px;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: var(--main-transition);
+    border: none;
+    cursor: pointer;
+}
+.submit:hover {
+    background-color: var(--blue-color);
+}
+.submit > i {
+    font-size: 15px;
+}
+/*  End Submit button  */
+
+/* Start log out button  */
+#log-out {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    background: #f4433680;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    transition: var(--main-transition);
+    cursor: pointer;
+    text-decoration: none;
+}
+#log-out:hover {
+    background: var(--red-color);
+}
+/* End log out button  */
+
+/*===================== End General & Variables =====================*/
 
 /* Start Container  */
 .container {
@@ -103,6 +165,29 @@ input:focus::placeholder {
         width: 1170px;
     }
 }
+.add-student {
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    background: #22c55e75;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 50%;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    transition: var(--main-transition);
+    cursor: pointer;
+}
+.add-student:hover {
+    background-color: var(--green-color);
+}
+/* log out button  */
 /* End Container  */
 
 /* Start Header Styling  */
@@ -115,10 +200,9 @@ header {
     box-shadow: 0 0 10px 0 #ccc;
     position: relative;
     z-index: 1;
-    overflow: hidden;
 }
 header .logo img {
-    width: 150px;
+    width: 120px;
 }
 header .links {
     list-style: none;
@@ -127,6 +211,25 @@ header .links {
     gap: 15px;
     font-size: 15px;
 }
+header .links.toggle {
+    right: 0;
+}
+@media (max-width: 767px) {
+    header .links {
+        position: fixed;
+        flex-direction: column;
+        justify-content: center;
+        right: -200px;
+        transition: var(--main-transition);
+        width: 200px;
+        gap: 25px;
+        top: 0;
+        height: 100%;
+        padding: 10px;
+        background: #dddddd61;
+    }
+}
+
 header .links .link a {
     text-decoration: none;
     color: var(--black-color);
@@ -134,6 +237,20 @@ header .links .link a {
 }
 header .links .link a:hover {
     color: var(--red-color);
+}
+header .links-btn {
+    background: transparent;
+    border: none;
+    font-size: 25px;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+    display: none;
+}
+@media (max-width: 767px) {
+    header .links-btn {
+        display: block;
+    }
 }
 /* End Header Styling  */
 
@@ -153,276 +270,302 @@ header .links .link a:hover {
     border-radius: 8px;
     z-index: 2;
 }
-.sign .sign-box .login-alert {
-    margin: -10px 0 5px;
-    color: var(--red-color);
-    font-weight: bold;
-}
 /* End Sign Section  */
 
-/* Start sign out button  */
+/* Start dashboard section  */
 
-button.log-out {
+.full-page {
+    background: var(--main-bg-color);
+    position: relative;
+}
+
+.wrapper {
+    height: calc(100vh - 100px);
+    max-height: calc(100vh - 100px);
+    display: flex;
+    padding: 10px 15px;
+    gap: 15px;
+}
+
+@media (max-width: 991px) {
+    .wrapper {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 767px) {
+    .wrapper {
+        max-height: none;
+        height: auto;
+    }
+}
+
+.wrapper .insert {
+    width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    transition: var(--main-transition);
+}
+
+@media (max-width: 991px) {
+    .wrapper .insert {
+        width: 100%;
+    }
+}
+
+.wrapper .list-students {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    transition: var(--main-transition);
+}
+
+.wrapper .insert .submit {
+    width: 150px;
+}
+
+.wrapper .list-students .push-btn {
     position: absolute;
-    padding: 10px;
-    right: 10px;
-    bottom: 10px;
+    top: 50%;
+    margin-left: -30px;
+    transform: translateY(-50%) rotate(0deg);
+    font-size: 25px;
+    background: transparent;
     border: none;
-    background: #f4433675;
+    cursor: pointer;
+    animation: bouncing-left-right 1s ease infinite reverse;
+    color: #00000055;
+    transition: var(--main-transition);
+}
+
+.wrapper .list-students .push-btn:hover {
+    color: var(--black-color);
+}
+
+.list-students .students-wrapper {
+    overflow-y: scroll;
+    padding-right: 10px;
+}
+
+.list-students .students-wrapper .student-card {
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px -1px rgba(0, 0, 0, 0.16), 0 1px 4px -1px rgba(0, 0, 0, 0.04);
+    background: #f0f0f0;
+    margin-bottom: 15px;
+}
+
+.list-students .students-wrapper .student-card .student-info {
+    display: flex;
+    gap: 5px;
+}
+
+@media (max-width: 767px) {
+    .list-students .students-wrapper .student-card .student-info{
+        flex-wrap: wrap;
+        gap: 0;
+    }
+}
+
+.list-students .students-wrapper .student-card .student-info > div {
+    font-size: 20px;
+    padding: 0 20px;
+    width: 25%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width: 767px) {
+    .list-students .students-wrapper .student-card .student-info > div {
+        width: 50%;
+    }
+}
+
+.list-students .students-wrapper .student-card .student-info > div > span {
+    font-size: 12px;
+    align-self: start;
+    display: flex;
+    gap: 5px;
+}
+
+.list-students .students-wrapper .student-card .student-control {
+    display: flex;
+    gap: 10px;
+    flex-direction: row-reverse;
+}
+
+.list-students .students-wrapper .student-card .student-control .crud {
+    padding: 5px 10px;
+    border: none;
     color: white;
     font-weight: bold;
     border-radius: 6px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    flex-direction: column-reverse;
-    cursor: pointer;
     transition: var(--main-transition);
+    cursor: pointer;
+    text-decoration: none;
 }
 
-button.log-out:hover {
+.list-students .students-wrapper .student-card .student-control .crud.delete {
+    background-color: #f443368b;
+}
+
+.list-students .students-wrapper .student-card .student-control .crud.delete:hover {
     background-color: var(--red-color);
-    box-shadow: 3px 3px #ccc;
 }
 
-button.add-student {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    padding: 10px;
-    background: #22c55e78;
-    border: none;
-    border-radius: 8px;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 0.75rem;
-    transition: var(--main-transition);
-}
-button.add-student:hover {
-    background-color: var(--green-color);
+.list-students .students-wrapper .student-card .student-control .crud.print {
+    background-color: #00000065;
 }
 
-/* End Sign out button  */
-
-/* Start Calc Page Styling */
-
-.main-wrapper {
-    display: flex;
-    padding: 20px 0;
+.list-students .students-wrapper .student-card .student-control .crud.print:hover {
+    background-color: var(--black-color);
 }
 
-.insert-wrapper,
-.inserted-student-wrapper {
-    padding: 0 10px;
-    position: relative;
-    width: 50%;
+.list-students .students-wrapper .student-card .student-control .crud.update {
+    background-color: #0077ff83;
 }
 
-.insert-wrapper .insert-field {
+.list-students .students-wrapper .student-card .student-control .crud.update:hover {
+    background-color: var(--blue-color);
+}
+
+.student-profile {
+    width: 80px;;
+}
+
+.no-record {
+    text-align: center;
+    padding: 20px;
+    font-size: .80rem;
+    color: #777;
+    text-transform: capitalize;
+}
+
+.update-form {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
-}
-
-.insert-wrapper .insert-field .input-field.student > input {
-    width: 100%;
-}
-
-.insert-wrapper .insert-field .insert-notes {
-    display: flex;
-    gap: 10px;
-}
-
-.insert-wrapper .insert-notes .side .input-field.note > input {
-    padding: 10px;
-}
-
-.inserted-student-wrapper .student-list {
-    height: calc(100vh - 200px);
-    max-height: calc(100vh - 200px);
-    overflow-y: scroll;
-    padding: 0 10px 0 0;
-}
-
-.inserted-student-wrapper .student-list .student-card {
-    margin-bottom: 10px;
-    padding: 10px;
-    background-color: var(--main-bg-color);
     border-radius: 8px;
+    background-color: #0075ff12;
+    padding: 10px;
+    display: none;
 }
 
-.inserted-student-wrapper .student-list .student-card .result {
+.update-form  form > div{
     display: flex;
     gap: 10px;
-    padding: 10px 0;
-    border: 1px solid #ccc;
-    border-left: none;
-    border-right: none;
-}
-
-.inserted-student-wrapper .student-list .student-card .student-name {
     margin-bottom: 10px;
 }
 
-.inserted-student-wrapper .student-list .student-card .notes {
-    display: flex;
-    gap: 10px;
+.update-form .input-field {
+    margin-bottom: 0;
 }
 
-.inserted-student-wrapper .student-list .student-card .notes .note {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
+.update-form  form > .submit {
+    margin-bottom: 5px;
 }
 
-.inserted-student-wrapper
-    .student-list
-    .student-card
-    .notes
-    .note:not(:last-child) {
-    margin-bottom: 10px;
-}
-
-.inserted-student-wrapper .student-card .notes .note > input {
-    width: 65px;
-    padding: 5px 0 5px 5px;
-    outline: none;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-}
-
-.inserted-student-wrapper .student-list .grade {
-    display: flex;
-    align-items: center;
-    font-size: 25px;
-    position: relative;
-}
-
-.inserted-student-wrapper .student-list .grade > sub {
-    font-size: 10px;
-}
-
-.inserted-student-wrapper .student-list .actions {
-    padding: 10px 0;
-    display: flex;
-    justify-content: end;
-    gap: 10px;
-}
-
-.inserted-student-wrapper .student-list .actions > button {
+.update-form > button {
+    font-size: 13px;
     border: none;
-    padding: 6px;
-    text-transform: capitalize;
-    color: white;
+    color: #f4433679;
     font-weight: bold;
-    border-radius: 6px;
-    font-size: 10px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    transition: var(--main-transition);
+    background: transparent;
+    cursor: pointer;
+}
+
+.update-form > button:hover {
+    color: var(--red-color);
+}
+
+.profile {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    padding: 10px;
+}
+
+.profile .avatar {
+    padding: 10px;
     display: flex;
     align-items: center;
     gap: 5px;
     cursor: pointer;
+    color: #fff;
+    background: #888;
+    border-radius: 0 0 8px 8px;
     transition: var(--main-transition);
 }
 
-.inserted-student-wrapper .student-list .actions .action-update {
-    background-color: #0077ff82;
+.profile .avatar:hover {
+    background-color: #333;
 }
 
-.inserted-student-wrapper .student-list .actions .action-update:hover {
-    background: var(--blue-color);
+.profile .avatar > i {
+    font-size: 20px;
 }
 
-.inserted-student-wrapper .student-list .actions .action-delete {
-    background-color: #f4433680;
-}
-
-.inserted-student-wrapper .student-list .actions .action-delete:hover {
-    background-color: var(--red-color);
-}
-
-.inserted-student-wrapper .student-list .actions button > i {
-}
-
-/* End Calc Page Styling */
-
-/* Start Components  */
-
-/* Start Primary Checkbox */
-.primary-checkbox {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: flex-end;
-    align-items: center;
+.profile .options {
+    padding: 10px;
+    text-transform: capitalize;
+    background: #888;
+    color: white;
+    border-radius: 8px 8px 0 0;
+    border-bottom: 1px solid #ccc;
+    transition: var(--main-transition);
+    height: 0;
+    overflow: hidden;
+    padding: 0;
+    cursor: pointer;
     user-select: none;
 }
-.primary-checkbox > input {
-    visibility: hidden;
-}
-.primary-checkbox > div {
-    width: 14px;
-    height: 14px;
-    border-radius: 3px;
-    border: 1px solid #aaa;
-    margin-right: 10px;
-    position: relative;
-    transition: 0.3s;
-}
-.primary-checkbox > div::before {
-    content: "\f00c";
-    font-family: "Font Awesome 6 Free";
-    font-weight: 900;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%) rotate(230deg) scale(0);
-    font-size: 11px;
-    width: 0%;
-    height: 0%;
-    border-radius: 3px;
-    color: #fff;
-    background-color: var(--blue-color);
-    z-index: 2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: 0.3s;
-}
-.primary-checkbox > input:checked + div::before {
-    width: 100%;
-    height: 100%;
-    transform: translate(-50%, -50%) rotate(0deg) scale(1);
-    border: 1px solid var(--blue-color);
-}
-/* End Primary Checkbox */
 
-/* Start Submit button  */
-.submit {
-    display: block;
-    width: fit-content;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 15px;
-    text-decoration: none;
+.profile .options > a {
     color: white;
-    background: #278cff;
-    padding: 10px 20px;
-    font-weight: bold;
-    border-radius: 5px;
-    transition: var(--main-transition);
-    border: none;
-    cursor: pointer;
+    text-decoration: none;
 }
-.submit:hover {
-    background-color: var(--blue-color);
-}
-.submit > i {
-    font-size: 15px;
-}
-/* End Submit button  */
 
-/* End Components  */
+.profile .options:hover {
+    background-color: #333;
+}
+
+.profile .options.show-options {
+    padding: 10px;
+    height: auto;
+}
+
+/* these classes used for Toggle the side push using Js */
+.insert-push { 
+    width: 35% !important;
+}
+
+.list-shrink {
+    width: 75% !important;
+}
+
+.btn-rotate {
+    transform: rotate(180deg);
+}
+
+/* End dashboard section  */
+
+
+
+/* Start Animations  */
+@keyframes bouncing-left-right {
+    0%,100% {
+        transform: translateX(0) translateY(-50%);;
+    }
+    50% {
+        transform: translateX(5px) translateY(-50%);;
+    }
+}
+/* End Animations  */
