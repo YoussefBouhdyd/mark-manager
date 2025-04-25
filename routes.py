@@ -1,10 +1,11 @@
 from flask import render_template,request,make_response,flash,redirect,session,url_for
-from models import marks
+from models import Marks
 
 def register_routes(app,db):
     @app.template_filter('trim')
     def trim_zero(n):
         return format(n,'g')
+    
     @app.route("/",methods=["POST","GET"])
     def index():
         if request.method == "GET":
@@ -26,16 +27,15 @@ def register_routes(app,db):
 
     @app.route("/dashboard")
     def dashboard():
-        records = marks.query.all()
+        records = Marks.query.all()
         return render_template("dashboard.html",records=records)
-
 
     @app.route("/add",methods=["POST"])
     def add():
         student_name = request.form.get("student-name")
         math = request.form.get("math")
         computer = request.form.get("info")
-        new_record = marks(student_name=student_name, math=math, computer=computer)
+        new_record = Marks(student_name=student_name, math=math, computer=computer)
         db.session.add(new_record)
         db.session.commit()
         return redirect("/dashboard")
@@ -43,7 +43,7 @@ def register_routes(app,db):
     @app.route("/delete")
     def delete():
         student_id = request.args.get("id")
-        student = marks.query.get(student_id)
+        student = Marks.query.get(student_id)
         db.session.delete(student)
         db.session.commit()
         return redirect("/dashboard")
@@ -54,3 +54,16 @@ def register_routes(app,db):
         response.delete_cookie("login")
         return response
 
+    @app.route("/update",methods = ["POST"])
+    def update():
+        id = request.form.get('id')
+        new_name = request.form.get('name-update')
+        new_math = request.form.get('math-update')
+        new_info = request.form.get('info-update')
+        student = Marks.query.get(id)
+        if student:
+            student.student_name = new_name
+            student.math = new_math
+            student.computer = new_info
+            db.session.commit()
+        return redirect('/')
