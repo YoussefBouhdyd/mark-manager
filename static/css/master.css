@@ -270,6 +270,11 @@ header .links-btn {
     border-radius: 8px;
     z-index: 2;
 }
+
+.sign.sign-up .sign-box {
+    width: 400px;
+}
+
 /* End Sign Section  */
 
 /* Start dashboard section  */
@@ -569,3 +574,27 @@ header .links-btn {
     }
 }
 /* End Animations  */
+
+
+
+/* Start Alerts  */
+
+.register-success {
+    color: white;
+    margin-bottom: 10px;
+    background: var(--green-color);
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+.login-alert {
+    color: white;
+    margin-bottom: 10px;
+    background: var(--red-color);
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+/* End  Alerts  */

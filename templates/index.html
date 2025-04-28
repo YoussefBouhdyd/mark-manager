@@ -28,7 +28,7 @@
                 <h2 class="title">Welcome to the Results Platform</h2>
                 {% with message = get_flashed_messages(with_categories = True) %}
                     {% if message %}
-                        <p class="{{message[0][0]}}"> {{message[0][1]}} </p>
+                        <p class="{{message[0][0]}}"> <i class="fas fa-info-circle"></i> {{message[0][1]}} </p>
                     {% endif %}
                 {% endwith %}
                 <form action="/" method="post" >
@@ -47,7 +47,7 @@
                     </label>
                     <input type="submit" class="submit">
                 </form>
-                <a href="#" class="forget">You forget your password ?</a>
+                <a href="/sign-up">Register</a>
             </div>
         </div>
     </div>

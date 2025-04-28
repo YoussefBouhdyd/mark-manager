@@ -9,9 +9,9 @@ db = SQLAlchemy()
 def create_app():
     app = Flask(__name__,static_url_path="/")
     app.secret_key = "1234"
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir,'database/marks.db')
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir,'database/data.db')
     db.init_app(app)
     from routes import register_routes
     register_routes(app,db)
-    migrate = Migrate(app,db) 
+    # migrate = Migrate(app,db) # I Will Use Later
     return app

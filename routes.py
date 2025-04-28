@@ -1,11 +1,26 @@
 from flask import render_template,request,make_response,flash,redirect,session,url_for
-from models import Marks
+from werkzeug.security import generate_password_hash, check_password_hash
+from models import Marks,Teacher
 
 def register_routes(app,db):
     @app.template_filter('trim')
     def trim_zero(n):
         return format(n,'g')
     
+    @app.route("/sign-up" , methods = ["POST" , "GET"])
+    def sign_up():
+        if request.method == "POST":
+            first_name = request.form.get('first-name')
+            username = request.form.get('user-name')
+            password = request.form.get('password')
+            teacher = Teacher(teacher_name = first_name , username = username , password = generate_password_hash(password))
+            db.session.add(teacher)
+            db.session.commit()
+            flash("You Registered Successfully","register-success")
+            return redirect("/")
+
+        return render_template("signUp.html")
+
     @app.route("/",methods=["POST","GET"])
     def index():
         if request.method == "GET":
@@ -16,7 +31,9 @@ def register_routes(app,db):
             user_name = request.form.get("user-name")
             password = request.form.get("password")
             remember_me = request.form.get("remember")
-            if (user_name == "Youssef" and password == "A@youssef123"):
+            teacher = Teacher.query.filter_by(username = user_name).first()
+            if teacher and check_password_hash(teacher.password,password):
+                session['username'] = user_name
                 response = make_response(redirect("/dashboard"))
                 if remember_me == "on":
                     response.set_cookie("login",user_name)
@@ -27,7 +44,8 @@ def register_routes(app,db):
 
     @app.route("/dashboard")
     def dashboard():
-        records = Marks.query.all()
+        teacher_id = Teacher.query.filter_by(username =  session['username']).first().id_teacher
+        records = Marks.query.filter_by(id_teacher = teacher_id).all()
         return render_template("dashboard.html",records=records)
 
     @app.route("/add",methods=["POST"])
@@ -35,7 +53,8 @@ def register_routes(app,db):
         student_name = request.form.get("student-name")
         math = request.form.get("math")
         computer = request.form.get("info")
-        new_record = Marks(student_name=student_name, math=math, computer=computer)
+        teacher_id = Teacher.query.filter_by(username = session['username']).first().id_teacher
+        new_record = Marks(id_teacher = teacher_id,student_name=student_name, math=math, computer=computer)
         db.session.add(new_record)
         db.session.commit()
         return redirect("/dashboard")
